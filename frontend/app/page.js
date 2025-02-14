@@ -1,7 +1,16 @@
-import Image from "next/image";
 
+function Texto1(){
+  return <p>um outro parágrafo de texto!</p>;
+} 
 export default function Home() {
-  return <h1>Olá mundo</h1>; {
-  return <p>sagfdui saoidfv aboifnsqapoinfsqnaoirfnbVAYWUVFQISOPq</p>;
-  }
+  const aula=1;
+    return( 
+      <div>
+        <h1>Olá mundo</h1> 
+        <p>aula {aula} teste com react</p>
+        <Texto1/>
+      </div>
+      
+  );
+  
 }

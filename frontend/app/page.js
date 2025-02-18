@@ -1,5 +1,5 @@
 
-function Texto1(){
+export function Texto1(){
   return <p>um outro parágrafo de texto!</p>;
 } 
 export default function Home() {
@@ -14,3 +14,4 @@ export default function Home() {
   );
   
 }
+// import home, {Texto1}  from'.page;

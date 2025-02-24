@@ -1,17 +1,22 @@
+import { useState } from "react";
 
-export function Texto1(){
-  return <p>um outro parágrafo de texto!</p>;
-} 
-export default function Home() {
-  const aula=1;
-    return( 
-      <div>
-        <h1>Olá mundo</h1> 
-        <p>aula {aula} teste com react</p>
-        <Texto1/>
-      </div>
-      
-  );
-  
+function Texto1() {
+  return <p>Um outro parágrafo de texto!</p>;
 }
-// import home, {Texto1}  from'.page;
+
+export default function Home() {
+  const [hide,setHide] = useState(false);
+  const aula=2;
+  return (
+    <div>
+      <h1>Olá Turma!!!!</h1>
+      <p>Essa é a nossa {aula}ª aula de React!</p>
+      {!hide && (
+      <>
+      <Texto1 />
+      <Texto1 />
+      </>
+      )}
+    </div>
+  );
+}

@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from "react";
 
 function Texto1() {
@@ -11,10 +13,13 @@ export default function Home() {
     <div>
       <h1>Olá Turma!!!!</h1>
       <p>Essa é a nossa {aula}ª aula de React!</p>
+      <hr />
+      <button onClick={() => setHide(!hide)}>{hide ?"show" : "Hide"}</button>
+      <hr />
       {!hide && (
-      <>
-      <Texto1 />
-      <Texto1 />
+       <>
+         <Texto1 />
+         <Texto1 />
       </>
       )}
     </div>

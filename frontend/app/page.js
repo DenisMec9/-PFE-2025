@@ -30,7 +30,7 @@ export default function App() {
   return (
     <div className="flex flex-col items-center justify-center h-screen gap-4">
       <Dado valor={valorDado} />
-      <Button onClick={rolarDado} className="px-4 py-2 text-lg">
+      <Button onClick={rolarDado} className="px-5 py-2 text-lg">
         Rolar Dado
       </Button>
     </div>

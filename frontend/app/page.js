@@ -13,7 +13,7 @@ const Dado = ({ valor }) => {
 
   return (
     <div className="flex flex-col items-center">
-      <img src={imagens[valor]} alt={`Dado ${valor}`} className="w-24 h-24" />
+      <img src={imagens[valor]} alt={`Dado ${valor}`} className="w-23 h-24" />
       <p className="text-lg font-semibold mt-2">Valor: {valor}</p>
     </div>
   );

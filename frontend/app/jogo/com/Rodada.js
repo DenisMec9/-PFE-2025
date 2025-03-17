@@ -4,7 +4,7 @@ import Dado from './Dado';
 function Rodada({ jogador1, jogador2, onRodadaCompleta }) {
   const [valorDado1, setValorDado1] = useState(null);
   const [valorDado2, setValorDado2] = useState(null);
-  const [jogadorAtivo, setJogadorAtivo] = useState(1); // 1 para Jogador 1, 2 para Jogador 2
+  const [jogadorAtivo, setJogadorAtivo] = useState(1);
 
   const rolarDado = () => {
     if (jogadorAtivo === 1) {
@@ -38,3 +38,5 @@ function Rodada({ jogador1, jogador2, onRodadaCompleta }) {
     </div>
   );
 }
+
+export default Rodada;

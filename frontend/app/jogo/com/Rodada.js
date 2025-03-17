@@ -43,7 +43,7 @@ function Rodada({ jogador1, jogador2, onRodadaCompleta }) {
         setValorDado2(null);
         setExibirDados(false);
         setRodadaAtual(rodadaAtual + 1);
-      }, 3000);
+      }, 1000);
 
       return () => clearTimeout(timeoutId);
     }

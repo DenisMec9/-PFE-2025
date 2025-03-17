@@ -40,24 +40,16 @@ function Jogo() {
         onRodadaCompleta={handleRodadaCompleta}
       />
       <Placar placarJogador1={placarJogador1} placarJogador2={placarJogador2} />
-      {(vencedor || rodadaAtual > 5) && (
+      {vencedor && (
         <div style={{ textAlign: 'center', marginTop: '20px' }}>
-          {vencedor && <h2 style={{ fontSize: '2em' }}>Vencedor: {vencedor}</h2>}
-          {rodadaAtual > 5 && !vencedor && <h2>Fim de Jogo!</h2>}
-          <button
-            onClick={jogarNovamente}
-            style={{
-              backgroundColor: 'black',
-              color: 'white',
-              padding: '10px 20px',
-              border: 'none',
-              borderRadius: '5px',
-              fontSize: '16px',
-              cursor: 'pointer',
-            }}
-          >
-            Jogar Novamente
-          </button>
+          <h2 style={{ fontSize: '2em' }}>Vencedor: {vencedor}</h2>
+          <button onClick={jogarNovamente}>Jogar Novamente</button>
+        </div>
+      )}
+      {!vencedor && rodadaAtual > 5 && (
+        <div style={{ textAlign: 'center', marginTop: '20px' }}>
+          <h2>Fim de Jogo!</h2>
+          <button onClick={jogarNovamente}>Jogar Novamente</button>
         </div>
       )}
     </div>

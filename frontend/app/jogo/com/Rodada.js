@@ -6,6 +6,9 @@ function Rodada({ jogador1, jogador2, onRodadaCompleta }) {
   const [valorDado2, setValorDado2] = useState(null);
   const [jogadorAtivo, setJogadorAtivo] = useState(1);
   const [vencedorRodada, setVencedorRodada] = useState(null);
+  const [rodadasJogador1, setRodadasJogador1] = useState([]);
+  const [rodadasJogador2, setRodadasJogador2] = useState([]);
+  const [rodadaAtual, setRodadaAtual] = useState(1);
 
   const rolarDado = () => {
     if (jogadorAtivo === 1) {
@@ -19,24 +22,31 @@ function Rodada({ jogador1, jogador2, onRodadaCompleta }) {
 
   useEffect(() => {
     if (valorDado1 !== null && valorDado2 !== null) {
+      setRodadasJogador1([...rodadasJogador1, valorDado1]);
+      setRodadasJogador2([...rodadasJogador2, valorDado2]);
+
       if (valorDado1 > valorDado2) {
         setVencedorRodada(jogador1);
-        onRodadaCompleta(1, 0); // Jogador 1 ganha
+        onRodadaCompleta(1, 0);
       } else if (valorDado2 > valorDado1) {
         setVencedorRodada(jogador2);
-        onRodadaCompleta(0, 1); // Jogador 2 ganha
+        onRodadaCompleta(0, 1);
       } else {
         setVencedorRodada('Empate');
-        onRodadaCompleta(0, 0); // Empate
+        onRodadaCompleta(0, 0);
       }
+
+      setValorDado1(null);
+      setValorDado2(null);
+      setRodadaAtual(rodadaAtual + 1);
     }
-  }, [valorDado1, valorDado2, jogador1, jogador2, onRodadaCompleta]);
+  }, [valorDado1, valorDado2, jogador1, jogador2, onRodadaCompleta, rodadasJogador1, rodadasJogador2, rodadaAtual]);
 
   const botaoDesabilitado = (jogador) => {
     if (jogador === 1) {
-      return jogadorAtivo !== 1 || valorDado1 !== null;
+      return jogadorAtivo !== 1 || valorDado1 !== null || rodadaAtual > 5;
     } else {
-      return jogadorAtivo !== 2 || valorDado2 !== null;
+      return jogadorAtivo !== 2 || valorDado2 !== null || rodadaAtual > 5;
     }
   };
 
@@ -52,7 +62,7 @@ function Rodada({ jogador1, jogador2, onRodadaCompleta }) {
           {valorDado2 !== null ? <Dado valor={valorDado2} /> : <button style={{ backgroundColor: 'black', color: 'white' }} onClick={rolarDado} disabled={botaoDesabilitado(2)}>Rolar Dado</button>}
         </div>
       </div>
-      {vencedorRodada && <p>Vencedor da rodada: {vencedorRodada}</p>}
+      {vencedorRodada && <p>Vencedor da rodada {rodadaAtual - 1}: {vencedorRodada}</p>}
     </div>
   );
 }

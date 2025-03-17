@@ -10,9 +10,9 @@ function Dado({ valor }) {
     6: "6.jpeg",
 };
 
-  return (
-    <img src={imagens[valor - 1]} alt={`Dado ${valor}`} style={{ width: '50px', height: '50px' }} />
-  );
+return (
+  <img src={imagens[valor - 1]} alt={`Dado ${valor}`} style={{ width: '100px', height: '100px' }} />
+);
 }
 
 export default Dado;

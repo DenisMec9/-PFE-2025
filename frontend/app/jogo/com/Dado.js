@@ -11,7 +11,7 @@ function Dado({ valor }) {
 };
 
 return (
-  <img src={imagens[valor - 1]} alt={`Dado ${valor}`} style={{ width: '100px', height: '100px' }} />
+  <img src={imagens[valor - 1]} alt={`Dado ${valor}`} style={{ width: '100px', height: '150px' }} />
 );
 }
 

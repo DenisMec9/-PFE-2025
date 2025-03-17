@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import Dado from './Dado';
 
-function Rodada({ jogador1, jogador2, onRodadaCompleta }) {
+function Rodada({ jogador1, jogador2, onRodadaCompleta, rodadaAtual, rodadaCompleta }) {
   const [valorDado1, setValorDado1] = useState(null);
   const [valorDado2, setValorDado2] = useState(null);
   const [jogadorAtivo, setJogadorAtivo] = useState(1);
   const [vencedorRodada, setVencedorRodada] = useState(null);
   const [rodadasJogador1, setRodadasJogador1] = useState([]);
   const [rodadasJogador2, setRodadasJogador2] = useState([]);
-  const [rodadaAtual, setRodadaAtual] = useState(1);
   const [exibirDados, setExibirDados] = useState(false);
 
   const rolarDado = () => {
@@ -42,18 +41,17 @@ function Rodada({ jogador1, jogador2, onRodadaCompleta }) {
         setValorDado1(null);
         setValorDado2(null);
         setExibirDados(false);
-        setRodadaAtual(rodadaAtual + 1);
       }, 500);
 
       return () => clearTimeout(timeoutId);
     }
-  }, [exibirDados, valorDado1, valorDado2, jogador1, jogador2, onRodadaCompleta, rodadasJogador1, rodadasJogador2, rodadaAtual]);
+  }, [exibirDados, valorDado1, valorDado2, jogador1, jogador2, onRodadaCompleta, rodadasJogador1, rodadasJogador2]);
 
   const botaoDesabilitado = (jogador) => {
     if (jogador === 1) {
-      return jogadorAtivo !== 1 || valorDado1 !== null || rodadaAtual > 5 || exibirDados;
+      return jogadorAtivo !== 1 || valorDado1 !== null || rodadaCompleta || exibirDados;
     } else {
-      return jogadorAtivo !== 2 || valorDado2 !== null || rodadaAtual > 5 || exibirDados;
+      return jogadorAtivo !== 2 || valorDado2 !== null || rodadaCompleta || exibirDados;
     }
   };
 
@@ -69,7 +67,11 @@ function Rodada({ jogador1, jogador2, onRodadaCompleta }) {
           {valorDado2 !== null ? <Dado valor={valorDado2} /> : <button style={{ backgroundColor: 'black', color: 'white' }} onClick={rolarDado} disabled={botaoDesabilitado(2)}>Rolar Dado</button>}
         </div>
       </div>
-      {vencedorRodada && exibirDados && <p>Vencedor da rodada {rodadaAtual - 1}: {vencedorRodada}</p>}
+      {vencedorRodada && exibirDados && (
+        <p style={{ fontSize: '1.5em', textAlign: 'center' }}>
+          Vencedor da rodada {rodadaAtual}: {vencedorRodada}
+        </p>
+      )}
     </div>
   );
 }

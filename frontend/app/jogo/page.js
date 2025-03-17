@@ -1,5 +1,5 @@
 "use client"
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Rodada from './com/Rodada';
 import Placar from './com/Placa';
 
@@ -8,6 +8,7 @@ function Jogo() {
   const [placarJogador2, setPlacarJogador2] = useState(0);
   const [vencedor, setVencedor] = useState(null);
   const [rodadaAtual, setRodadaAtual] = useState(1);
+  const [rodadaCompleta, setRodadaCompleta] = useState(false);
 
   const handleRodadaCompleta = (pontosJogador1, pontosJogador2) => {
     setPlacarJogador1(placarJogador1 + pontosJogador1);
@@ -21,6 +22,9 @@ function Jogo() {
       } else {
         setVencedor('Empate');
       }
+      setRodadaCompleta(true);
+    } else {
+      setRodadaAtual(rodadaAtual + 1);
     }
   };
 
@@ -29,6 +33,7 @@ function Jogo() {
     setPlacarJogador2(0);
     setVencedor(null);
     setRodadaAtual(1);
+    setRodadaCompleta(false);
   };
 
   return (
@@ -38,6 +43,8 @@ function Jogo() {
         jogador1="Jogador 1"
         jogador2="Jogador 2"
         onRodadaCompleta={handleRodadaCompleta}
+        rodadaAtual={rodadaAtual}
+        rodadaCompleta={rodadaCompleta}
       />
       <Placar placarJogador1={placarJogador1} placarJogador2={placarJogador2} />
       {vencedor && (
@@ -46,7 +53,7 @@ function Jogo() {
           <button onClick={jogarNovamente}>Jogar Novamente</button>
         </div>
       )}
-      {!vencedor && rodadaAtual > 5 && (
+      {rodadaCompleta && !vencedor && (
         <div style={{ textAlign: 'center', marginTop: '20px' }}>
           <h2>Fim de Jogo!</h2>
           <button onClick={jogarNovamente}>Jogar Novamente</button>

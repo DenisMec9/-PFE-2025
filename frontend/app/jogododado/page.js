@@ -1,5 +1,6 @@
+"use client"
 import React, { useState } from 'react';
-import Rodada from './Rodada';
+import Rodada from './com/Rodada';
 import Placar from './Placar';
 
 function Jogo() {

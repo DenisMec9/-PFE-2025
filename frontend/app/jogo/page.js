@@ -1,3 +1,4 @@
+'use client'
 import React, { useState } from 'react';
 import Rodada from './Rodada';
 import Placar from './Placar';
@@ -43,7 +44,20 @@ function Jogo() {
         <div style={{ textAlign: 'center', marginTop: '20px' }}>
           {vencedor && <h2 style={{ fontSize: '2em' }}>Vencedor: {vencedor}</h2>}
           {rodadaAtual > 5 && !vencedor && <h2>Fim de Jogo!</h2>}
-          <button onClick={jogarNovamente}>Jogar Novamente</button>
+          <button
+            onClick={jogarNovamente}
+            style={{
+              backgroundColor: 'black',
+              color: 'white',
+              padding: '10px 20px',
+              border: 'none',
+              borderRadius: '5px',
+              fontSize: '16px',
+              cursor: 'pointer',
+            }}
+          >
+            Jogar Novamente
+          </button>
         </div>
       )}
     </div>

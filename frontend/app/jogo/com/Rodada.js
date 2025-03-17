@@ -9,6 +9,7 @@ function Rodada({ jogador1, jogador2, onRodadaCompleta }) {
   const [rodadasJogador1, setRodadasJogador1] = useState([]);
   const [rodadasJogador2, setRodadasJogador2] = useState([]);
   const [rodadaAtual, setRodadaAtual] = useState(1);
+  const [exibirDados, setExibirDados] = useState(false);
 
   const rolarDado = () => {
     if (jogadorAtivo === 1) {
@@ -17,36 +18,42 @@ function Rodada({ jogador1, jogador2, onRodadaCompleta }) {
     } else {
       setValorDado2(Math.floor(Math.random() * 6) + 1);
       setJogadorAtivo(1);
+      setExibirDados(true);
     }
   };
 
   useEffect(() => {
-    if (valorDado1 !== null && valorDado2 !== null) {
-      setRodadasJogador1([...rodadasJogador1, valorDado1]);
-      setRodadasJogador2([...rodadasJogador2, valorDado2]);
+    if (exibirDados) {
+      const timeoutId = setTimeout(() => {
+        setRodadasJogador1([...rodadasJogador1, valorDado1]);
+        setRodadasJogador2([...rodadasJogador2, valorDado2]);
 
-      if (valorDado1 > valorDado2) {
-        setVencedorRodada(jogador1);
-        onRodadaCompleta(1, 0);
-      } else if (valorDado2 > valorDado1) {
-        setVencedorRodada(jogador2);
-        onRodadaCompleta(0, 1);
-      } else {
-        setVencedorRodada('Empate');
-        onRodadaCompleta(0, 0);
-      }
+        if (valorDado1 > valorDado2) {
+          setVencedorRodada(jogador1);
+          onRodadaCompleta(1, 0);
+        } else if (valorDado2 > valorDado1) {
+          setVencedorRodada(jogador2);
+          onRodadaCompleta(0, 1);
+        } else {
+          setVencedorRodada('Empate');
+          onRodadaCompleta(0, 0);
+        }
 
-      setValorDado1(null);
-      setValorDado2(null);
-      setRodadaAtual(rodadaAtual + 1);
+        setValorDado1(null);
+        setValorDado2(null);
+        setExibirDados(false);
+        setRodadaAtual(rodadaAtual + 1);
+      }, 3000);
+
+      return () => clearTimeout(timeoutId);
     }
-  }, [valorDado1, valorDado2, jogador1, jogador2, onRodadaCompleta, rodadasJogador1, rodadasJogador2, rodadaAtual]);
+  }, [exibirDados, valorDado1, valorDado2, jogador1, jogador2, onRodadaCompleta, rodadasJogador1, rodadasJogador2, rodadaAtual]);
 
   const botaoDesabilitado = (jogador) => {
     if (jogador === 1) {
-      return jogadorAtivo !== 1 || valorDado1 !== null || rodadaAtual > 5;
+      return jogadorAtivo !== 1 || valorDado1 !== null || rodadaAtual > 5 || exibirDados;
     } else {
-      return jogadorAtivo !== 2 || valorDado2 !== null || rodadaAtual > 5;
+      return jogadorAtivo !== 2 || valorDado2 !== null || rodadaAtual > 5 || exibirDados;
     }
   };
 
@@ -62,7 +69,7 @@ function Rodada({ jogador1, jogador2, onRodadaCompleta }) {
           {valorDado2 !== null ? <Dado valor={valorDado2} /> : <button style={{ backgroundColor: 'black', color: 'white' }} onClick={rolarDado} disabled={botaoDesabilitado(2)}>Rolar Dado</button>}
         </div>
       </div>
-      {vencedorRodada && <p>Vencedor da rodada {rodadaAtual - 1}: {vencedorRodada}</p>}
+      {vencedorRodada && exibirDados && <p>Vencedor da rodada {rodadaAtual - 1}: {vencedorRodada}</p>}
     </div>
   );
 }

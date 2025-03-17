@@ -1,7 +1,7 @@
 "use client"
 import React, { useState } from 'react';
-import Rodada from './Rodada';
-import Placar from './Placar';
+import Rodada from './com/Rodada';
+import Placar from './com/Placa';
 
 function Jogo() {
   const [placarJogador1, setPlacarJogador1] = useState(0);

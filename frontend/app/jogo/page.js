@@ -48,7 +48,7 @@ function Jogo() {
       />
       <Placar placarJogador1={placarJogador1} placarJogador2={placarJogador2} />
       {vencedor && (
-        <div style={{ textAlign: 'center', marginTop: '20px' }}>
+        <div style={{ textAlign: 'right', marginTop: '50px' }}>
           <h2 style={{ fontSize: '2em' }}>Vencedor: {vencedor}</h2>
           <button onClick={jogarNovamente}>Jogar Novamente</button>
         </div>

@@ -1,23 +1,25 @@
-"use client";
 import React, { useState } from "react";
-import Dado from "./com/Dado";
+import Dado from "./components/Dado";
 
 const App = () => {
   const [rodada, setRodada] = useState(1);
   const [vitoriasJogador1, setVitoriasJogador1] = useState(0);
   const [vitoriasJogador2, setVitoriasJogador2] = useState(0);
-  const [dadoJogador1, setDadoJogador1] = useState(null); // Inicializado como null
-  const [dadoJogador2, setDadoJogador2] = useState(null); // Inicializado como null
+  const [dadoJogador1, setDadoJogador1] = useState(1);
+  const [dadoJogador2, setDadoJogador2] = useState(1);
   const [vencedor, setVencedor] = useState(null);
 
   const rolarDados = () => {
     if (rodada <= 5) {
-      setDadoJogador1(6); // Definido como 6 na rolagem
-      setDadoJogador2(6); // Definido como 6 na rolagem
+      const valor1 = Math.floor(Math.random() * 6) + 1;
+      const valor2 = Math.floor(Math.random() * 6) + 1;
 
-      if (6 > 6) {
+      setDadoJogador1(valor1);
+      setDadoJogador2(valor2);
+
+      if (valor1 > valor2) {
         setVitoriasJogador1(vitoriasJogador1 + 1);
-      } else if (6 > 6) {
+      } else if (valor2 > valor1) {
         setVitoriasJogador2(vitoriasJogador2 + 1);
       }
 
@@ -39,14 +41,14 @@ const App = () => {
     setRodada(1);
     setVitoriasJogador1(0);
     setVitoriasJogador2(0);
-    setDadoJogador1(null); // Reinicializado como null
-    setDadoJogador2(null); // Reinicializado como null
+    setDadoJogador1(1);
+    setDadoJogador2(1);
     setVencedor(null);
   };
 
   return (
     <div style={{ textAlign: "center", marginTop: "50px" }}>
-      <h1>Jogo de Dados </h1>
+      <h1>Jogo de Dados 🎲</h1>
       <h2>Rodada: {rodada <= 5 ? rodada : "Fim do jogo"}</h2>
 
       <div style={{ display: "flex", justifyContent: "center", gap: "50px", margin: "20px 0" }}>
@@ -64,13 +66,13 @@ const App = () => {
 
       {rodada <= 5 ? (
         <button onClick={rolarDados} style={{ padding: "10px 20px", fontSize: "16px" }}>
-          Jogar Rodada 
+          Jogar Rodada 🎲
         </button>
       ) : (
         <>
           <h2>{vencedor}</h2>
           <button onClick={reiniciarJogo} style={{ padding: "10px 20px", fontSize: "16px", marginTop: "20px" }}>
-            Jogar Novamente 
+            Jogar Novamente 🔄
           </button>
         </>
       )}

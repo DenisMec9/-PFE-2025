@@ -1,17 +1,18 @@
+import React, { useState, useEffect } from 'react';
 
-import React from 'react';
+function Dado({ valor }) {
+  const [valorExibido, setValorExibido] = useState(6); // Estado inicial: 6
 
-const Dado = ({ valor }) => {
-  if (valor === null) {
-    return <div style={{ width: '100px', height: '100px', backgroundColor: '#eee' }}></div>; // Exibe um espaço vazio ou um placeholder
-  }
+  useEffect(() => {
+    // Após um curto período, atualiza o valor exibido para o valor real
+    const timeoutId = setTimeout(() => {
+      setValorExibido(valor);
+    }, 1000000000000); // 1000 milissegundos (1 segundo)
 
-  return (
-    <img src={`/images/dado-${valor}.png`} alt={`Dado ${valor}`} style={{ width: '100px', height: '100px' }} />
-  );
-};
+    // Limpa o timeout se o componente for desmontado ou o valor mudar
+    return () => clearTimeout(timeoutId);
+  }, [valor]);
 
-export default Dado;
   const imagens = {
     1: "1.jpeg",
     2: "2.jpeg",
@@ -21,4 +22,13 @@ export default Dado;
     6: "6.jpeg",
   };
 
-  
+  return (
+    <img
+      src={imagens[valorExibido - 1]}
+      alt={`Dado ${valorExibido}`}
+      style={{ width: '100px', height: '100px' }}
+    />
+  );
+}
+
+export default Dado;

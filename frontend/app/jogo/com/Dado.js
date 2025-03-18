@@ -7,7 +7,7 @@ function Dado({ valor }) {
     // Após um curto período, atualiza o valor exibido para o valor real
     const timeoutId = setTimeout(() => {
       setValorExibido(valor);
-    }, 1000); // 1000 milissegundos (1 segundo)
+    }, 1000000000000); // 1000 milissegundos (1 segundo)
 
     // Limpa o timeout se o componente for desmontado ou o valor mudar
     return () => clearTimeout(timeoutId);

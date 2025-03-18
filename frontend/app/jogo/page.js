@@ -1,23 +1,23 @@
 "use client";
 import React, { useState } from "react";
-import Dado from "./com/Dado"; // Certifique-se de que o caminho está correto
+import Dado from "./com/Dado";
 
 const App = () => {
   const [rodada, setRodada] = useState(1);
   const [vitoriasJogador1, setVitoriasJogador1] = useState(0);
   const [vitoriasJogador2, setVitoriasJogador2] = useState(0);
-  const [dadoJogador1, setDadoJogador1] = useState(6); // Inicializado com 6
-  const [dadoJogador2, setDadoJogador2] = useState(6); // Inicializado com 6
+  const [dadoJogador1, setDadoJogador1] = useState(null); // Inicializado como null
+  const [dadoJogador2, setDadoJogador2] = useState(null); // Inicializado como null
   const [vencedor, setVencedor] = useState(null);
 
   const rolarDados = () => {
     if (rodada <= 5) {
-      setDadoJogador1(6); // Forçando o resultado para 6
-      setDadoJogador2(6); // Forçando o resultado para 6
+      setDadoJogador1(6); // Definido como 6 na rolagem
+      setDadoJogador2(6); // Definido como 6 na rolagem
 
-      if (6 > 6) { // Comparação sempre falsa, mas mantém a estrutura
+      if (6 > 6) {
         setVitoriasJogador1(vitoriasJogador1 + 1);
-      } else if (6 > 6) { // Comparação sempre falsa, mas mantém a estrutura
+      } else if (6 > 6) {
         setVitoriasJogador2(vitoriasJogador2 + 1);
       }
 
@@ -39,8 +39,8 @@ const App = () => {
     setRodada(1);
     setVitoriasJogador1(0);
     setVitoriasJogador2(0);
-    setDadoJogador1(6); // Reinicializado com 6
-    setDadoJogador2(6); // Reinicializado com 6
+    setDadoJogador1(null); // Reinicializado como null
+    setDadoJogador2(null); // Reinicializado como null
     setVencedor(null);
   };
 

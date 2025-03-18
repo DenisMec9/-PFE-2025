@@ -1,66 +1,83 @@
-"use client"
-import React, { useState, useEffect } from 'react';
-import Rodada from './com/Rodada';
-import Placar from './com/Placa';
+import React, { useState } from "react";
+import Dado from "./components/Dado";
 
-function Jogo() {
-  const [placarJogador1, setPlacarJogador1] = useState(0);
-  const [placarJogador2, setPlacarJogador2] = useState(0);
+const App = () => {
+  const [rodada, setRodada] = useState(1);
+  const [vitoriasJogador1, setVitoriasJogador1] = useState(0);
+  const [vitoriasJogador2, setVitoriasJogador2] = useState(0);
+  const [dadoJogador1, setDadoJogador1] = useState(1);
+  const [dadoJogador2, setDadoJogador2] = useState(1);
   const [vencedor, setVencedor] = useState(null);
-  const [rodadaAtual, setRodadaAtual] = useState(1);
-  const [rodadaCompleta, setRodadaCompleta] = useState(false);
 
-  const handleRodadaCompleta = (pontosJogador1, pontosJogador2) => {
-    setPlacarJogador1(placarJogador1 + pontosJogador1);
-    setPlacarJogador2(placarJogador2 + pontosJogador2);
+  const rolarDados = () => {
+    if (rodada <= 5) {
+      const valor1 = Math.floor(Math.random() * 6) + 1;
+      const valor2 = Math.floor(Math.random() * 6) + 1;
 
-    if (rodadaAtual === 5) {
-      if (placarJogador1 > placarJogador2) {
-        setVencedor('Jogador 1');
-      } else if (placarJogador2 > placarJogador1) {
-        setVencedor('Jogador 2');
-      } else {
-        setVencedor('Empate');
+      setDadoJogador1(valor1);
+      setDadoJogador2(valor2);
+
+      if (valor1 > valor2) {
+        setVitoriasJogador1(vitoriasJogador1 + 1);
+      } else if (valor2 > valor1) {
+        setVitoriasJogador2(vitoriasJogador2 + 1);
       }
-      setRodadaCompleta(true);
-    } else {
-      setRodadaAtual(rodadaAtual + 1);
+
+      setRodada(rodada + 1);
+    }
+
+    if (rodada === 5) {
+      if (vitoriasJogador1 > vitoriasJogador2) {
+        setVencedor("Jogador 1 venceu!");
+      } else if (vitoriasJogador2 > vitoriasJogador1) {
+        setVencedor("Jogador 2 venceu!");
+      } else {
+        setVencedor("Empate!");
+      }
     }
   };
 
-  const jogarNovamente = () => {
-    setPlacarJogador1(0);
-    setPlacarJogador2(0);
+  const reiniciarJogo = () => {
+    setRodada(1);
+    setVitoriasJogador1(0);
+    setVitoriasJogador2(0);
+    setDadoJogador1(1);
+    setDadoJogador2(1);
     setVencedor(null);
-    setRodadaAtual(1);
-    setRodadaCompleta(false);
   };
 
   return (
-    <div>
-      <h1>Jogo de Dados</h1>
-      <Rodada
-        jogador1="Jogador 1"
-        jogador2="Jogador 2"
-        onRodadaCompleta={handleRodadaCompleta}
-        rodadaAtual={rodadaAtual}
-        rodadaCompleta={rodadaCompleta}
-      />
-      <Placar placarJogador1={placarJogador1} placarJogador2={placarJogador2} />
-      {vencedor && (
-        <div style={{ textAlign: 'right', marginTop: '50px' }}>
-          <h2 style={{ fontSize: '2em' }}>Vencedor: {vencedor}</h2>
-          <button onClick={jogarNovamente}>Jogar Novamente</button>
+    <div style={{ textAlign: "center", marginTop: "50px" }}>
+      <h1>Jogo de Dados 🎲</h1>
+      <h2>Rodada: {rodada <= 5 ? rodada : "Fim do jogo"}</h2>
+
+      <div style={{ display: "flex", justifyContent: "center", gap: "50px", margin: "20px 0" }}>
+        <div>
+          <h3>Jogador 1</h3>
+          <Dado valor={dadoJogador1} />
+          <p>Vitórias: {vitoriasJogador1}</p>
         </div>
-      )}
-      {rodadaCompleta && !vencedor && (
-        <div style={{ textAlign: 'center', marginTop: '20px' }}>
-          <h2>Fim de Jogo!</h2>
-          <button onClick={jogarNovamente}>Jogar Novamente</button>
+        <div>
+          <h3>Jogador 2</h3>
+          <Dado valor={dadoJogador2} />
+          <p>Vitórias: {vitoriasJogador2}</p>
         </div>
+      </div>
+
+      {rodada <= 5 ? (
+        <button onClick={rolarDados} style={{ padding: "10px 20px", fontSize: "16px" }}>
+          Jogar Rodada 🎲
+        </button>
+      ) : (
+        <>
+          <h2>{vencedor}</h2>
+          <button onClick={reiniciarJogo} style={{ padding: "10px 20px", fontSize: "16px", marginTop: "20px" }}>
+            Jogar Novamente 🔄
+          </button>
+        </>
       )}
     </div>
   );
-}
+};
 
-export default Jogo;
+export default App;

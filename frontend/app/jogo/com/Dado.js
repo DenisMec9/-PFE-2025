@@ -15,4 +15,4 @@ return (
 );
 }
 
-export default Dado;
+export default Dado; 

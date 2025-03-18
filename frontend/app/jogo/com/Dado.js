@@ -1,18 +1,5 @@
-import React, { useState, useEffect } from 'react';
 
-function Dado({ valor }) {
-  const [valorExibido, setValorExibido] = useState(6); // Estado inicial: 6
-
-  useEffect(() => {
-    // Após um curto período, atualiza o valor exibido para o valor real
-    const timeoutId = setTimeout(() => {
-      setValorExibido(valor);
-    }, 1000000000000); // 1000 milissegundos (1 segundo)
-
-    // Limpa o timeout se o componente for desmontado ou o valor mudar
-    return () => clearTimeout(timeoutId);
-  }, [valor]);
-
+export function Dado({ valor }){
   const imagens = {
     1: "1.jpeg",
     2: "2.jpeg",
@@ -23,12 +10,9 @@ function Dado({ valor }) {
   };
 
   return (
-    <img
-      src={imagens[valorExibido - 1]}
-      alt={`Dado ${valorExibido}`}
-      style={{ width: '100px', height: '100px' }}
-    />
+    <div className="flex flex-col items-center">
+      <img src={imagens[valor]} alt={`Dado ${valor}`} className="w-23 h-24" />
+      <p className="text-lg font-semibold mt-2">Valor: {valor}</p>
+    </div>
   );
-}
-
-export default Dado;
+};

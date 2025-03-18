@@ -1,18 +1,17 @@
-"use client";
+"use client"
 import React, { useState } from "react";
 import Dado from "./com/Dado";
 
 const App = () => {
-  const [rodada, setRodada] = useState(0);
+  const [rodada, setRodada] = useState(1);
   const [vitoriasJogador1, setVitoriasJogador1] = useState(0);
   const [vitoriasJogador2, setVitoriasJogador2] = useState(0);
-  const [dadoJogador1, setDadoJogador1] = useState(6);
-  const [dadoJogador2, setDadoJogador2] = useState(6);
+  const [dadoJogador1, setDadoJogador1] = useState(1);
+  const [dadoJogador2, setDadoJogador2] = useState(1);
   const [vencedor, setVencedor] = useState(null);
 
   const rolarDados = () => {
-    if (rodada < 5) {
-      setRodada(rodada + 1);
+    if (rodada <= 5) {
       const valor1 = Math.floor(Math.random() * 6) + 1;
       const valor2 = Math.floor(Math.random() * 6) + 1;
 
@@ -24,6 +23,8 @@ const App = () => {
       } else if (valor2 > valor1) {
         setVitoriasJogador2(vitoriasJogador2 + 1);
       }
+
+      setRodada(rodada + 1);
     }
 
     if (rodada === 5) {
@@ -38,18 +39,18 @@ const App = () => {
   };
 
   const reiniciarJogo = () => {
-    setRodada(0);
+    setRodada(1);
     setVitoriasJogador1(0);
     setVitoriasJogador2(0);
-    setDadoJogador1(6);
-    setDadoJogador2(6);
+    setDadoJogador1(1);
+    setDadoJogador2(1);
     setVencedor(null);
   };
 
   return (
     <div style={{ textAlign: "center", marginTop: "50px" }}>
-      <h1>Jogo de Dados </h1>
-      <h2>Rodada: {rodada < 5 ? rodada + 1 : "Fim do jogo"}</h2>
+      <h1>Jogo de Dados 🎲</h1>
+      <h2>Rodada: {rodada <= 5 ? rodada : "Fim do jogo"}</h2>
 
       <div style={{ display: "flex", justifyContent: "center", gap: "50px", margin: "20px 0" }}>
         <div>
@@ -64,15 +65,15 @@ const App = () => {
         </div>
       </div>
 
-      {rodada < 5 ? (
+      {rodada <= 5 ? (
         <button onClick={rolarDados} style={{ padding: "10px 20px", fontSize: "16px" }}>
-          Jogar Rodada 
+          Jogar Rodada 🎲
         </button>
       ) : (
         <>
           <h2>{vencedor}</h2>
           <button onClick={reiniciarJogo} style={{ padding: "10px 20px", fontSize: "16px", marginTop: "20px" }}>
-            Jogar Novamente 
+            Jogar Novamente 🔄
           </button>
         </>
       )}
@@ -81,4 +82,3 @@ const App = () => {
 };
 
 export default App;
-

@@ -1,6 +1,6 @@
 "use client"
 import React, { useState } from "react";
-import Dado from "./components/Dado";
+import Dado from "./com/Dado";
 
 const App = () => {
   const [rodada, setRodada] = useState(1);

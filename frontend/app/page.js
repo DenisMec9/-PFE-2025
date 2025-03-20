@@ -1,36 +1,20 @@
-"use client";
+"use client"
 
-import { useState } from "react";
+export default function Home(){ 
 
-function Texto1() {
-  return <p>Um outro parágrafo de texto!</p>;
-}
-
-function gerarNumAleat() {
-  return Math.floor(Math.random() * 100) + 1;
-}
-
-export default function Home() {
-  const [hide, setHide] = useState(false);
-  const [numAleat, setNumAleat] = useState(0);
-  const aula = 2;
-  return (
-    <div>
-      <h1>Olá Turma!!!!</h1>
-      <p>Essa é a nossa {aula}ª aula de React!</p>
-      <hr />
-      <button onClick={() => setNumAleat(gerarNumAleat())}>
-        Aletatório: {numAleat}
-      </button>
-      <hr />
-      <button onClick={() => setHide(!hide)}>{hide ? "Show" : "Hide"}</button>
-      <hr />
-      {!hide && (
-        <>
-          <Texto1 />
-          <Texto1 />
-        </>
-      )}
-    </div>
-  );
+    return (  
+        <div>  
+            <h1>Atividades Márcio</h1>
+            <ol>
+                <li>
+                    <p> Criar site que gere dados aleatórios</p>
+                    <a href="/dados">ver atividade</a>
+                </li>
+                <li>
+                    <p> Jogo de dados</p>
+                    <a href="/jogo">ver atividade</a>
+                </li>
+            </ol>
+        </div>  
+    );
 }

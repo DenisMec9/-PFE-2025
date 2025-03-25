@@ -14,6 +14,10 @@ export default function Home(){
                     <p> Jogo de dados</p>
                     <a href="/jogo">ver atividade</a>
                 </li>
+                <li>
+                    <p> Api Star Wars</p>
+                    <a href="/starwars">ver atividade</a>
+                </li>
             </ol>
         </div>  
     );
